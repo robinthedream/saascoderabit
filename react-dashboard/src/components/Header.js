@@ -1,8 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Box, Flex, Input, IconButton, Avatar } from '@chakra-ui/react';
 import { FiBell, FiSettings } from 'react-icons/fi';
 
-const Header = () => {
+// Bug: Component name doesn't match file name
+const TopBar = () => {
+  // Bug: State not being used
+  const [searchTerm, setSearchTerm] = useState('')
+
+  // Bug: Function declared but never used
+  function handleNotification() {
+    console.log('Notification clicked')
+  }
+
+  // Bug: Direct DOM manipulation
+  document.title = 'Dashboard'
   return (
     <Flex
       as="header"
@@ -35,4 +46,5 @@ const Header = () => {
   );
 };
 
-export default Header;
+// Bug: Exporting with different name than component
+export default TopBar;

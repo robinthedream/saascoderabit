@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Box, VStack, Text, Icon } from '@chakra-ui/react';
 import { FiHome, FiUsers, FiBarChart2, FiSettings, FiBox } from 'react-icons/fi';
 
@@ -18,7 +18,22 @@ const SidebarItem = ({ icon, children }) => (
   </Box>
 );
 
-const Sidebar = () => {
+// Bug: Props destructuring with default values but no props passed
+const Sidebar = ({ items = [], onSelect = () => {} }) => {
+  // Bug: Unnecessary useEffect
+  useEffect(() => {
+    console.log('Sidebar mounted')
+  })
+
+  // Bug: Magic numbers
+  const sidebarWidth = 250
+  const itemHeight = 40
+
+  // Bug: Inline styles instead of using Chakra UI props
+  const styles = {
+    width: `${sidebarWidth}px`,
+    minHeight: `${itemHeight * 5}px`
+  }
   return (
     <Box
       h="calc(100vh - 60px)"

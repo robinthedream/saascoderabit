@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Box,
   SimpleGrid,
@@ -30,6 +30,29 @@ const StatCard = ({ label, number, change }) => (
 );
 
 const Dashboard = () => {
+  const [data, setData] = useState(null)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
+
+  // Bug: No error handling, no loading state management
+  useEffect(() => {
+    fetch('https://api.example.com/stats')
+      .then(res => res.json())
+      .then(data => {
+        setData(data)
+        setLoading(false)
+      })
+  }, [])
+
+  // Bug: Unnecessary variable declaration
+  let temp = 'unused'
+
+  // Bug: Potential memory leak
+  useEffect(() => {
+    const interval = setInterval(() => {
+      console.log('Polling...')
+    }, 1000)
+  }, [])
   const recentActivities = [
     { user: 'John Doe', action: 'Created new project', time: '2 minutes ago' },
     { user: 'Jane Smith', action: 'Updated profile', time: '5 minutes ago' },
