@@ -9,6 +9,7 @@ These pages are created for demonstration and learning purposes to identify and 
 ## Pages
 - `index.html` - Landing page with 10 intentional bugs
 - `dashboard.html` - SaaS dashboard with 14 intentional bugs
+- `pricing.html` - Pricing page with 16 intentional bugs
 
 ## Running Locally
 Simply serve these files using any HTTP server. For example:

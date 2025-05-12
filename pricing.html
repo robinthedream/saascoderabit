@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buggy Pricing Page</title>
+    <style>
+        /* Bug 1: Missing global styles reset */
+        
+        /* Bug 2: Color variables not defined in :root */
+        .pricing-container {
+            display: flex;
+            justify-content: center;
+            /* Bug 3: No gap property for spacing */
+            padding: 2rem;
+            /* Bug 4: No media query for mobile */
+        }
+
+        .pricing-card {
+            /* Bug 5: Fixed width instead of responsive */
+            width: 300px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            /* Bug 6: Transform without transition */
+            transform: scale(1);
+        }
+
+        /* Bug 7: Overly specific selector */
+        .pricing-card div.price-amount span.currency {
+            font-size: 24px;
+            color: #333;
+        }
+
+        .price-amount {
+            font-size: 48px;
+            /* Bug 8: Font weight as string instead of number */
+            font-weight: "bold";
+        }
+
+        /* Bug 9: Missing hover state */
+        .cta-button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            margin-top: 20px;
+        }
+
+        .feature-list {
+            /* Bug 10: List style position outside container */
+            list-style-position: outside;
+            padding-left: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="pricing-container">
+        <!-- Bug 11: Missing ARIA labels -->
+        <div class="pricing-card">
+            <h2>Basic</h2>
+            <div class="price-amount">
+                <span class="currency">$</span>9
+                <span class="period">/month</span>
+            </div>
+            <ul class="feature-list">
+                <li>1 User</li>
+                <li>Basic Features</li>
+                <li>Email Support</li>
+            </ul>
+            <!-- Bug 12: onClick should be onclick -->
+            <button class="cta-button" onClick="selectPlan('basic')">Select Plan</button>
+        </div>
+
+        <div class="pricing-card">
+            <h2>Pro</h2>
+            <div class="price-amount">
+                <span class="currency">$</span>29
+                <span class="period">/month</span>
+            </div>
+            <ul class="feature-list">
+                <li>5 Users</li>
+                <li>Pro Features</li>
+                <li>Priority Support</li>
+            </ul>
+            <button class="cta-button" onClick="selectPlan('pro')">Select Plan</button>
+        </div>
+
+        <div class="pricing-card">
+            <h2>Enterprise</h2>
+            <div class="price-amount">
+                <span class="currency">$</span>99
+                <span class="period">/month</span>
+            </div>
+            <ul class="feature-list">
+                <li>Unlimited Users</li>
+                <li>All Features</li>
+                <li>24/7 Support</li>
+            </ul>
+            <button class="cta-button" onClick="selectPlan('enterprise')">Select Plan</button>
+        </div>
+    </div>
+
+    <script>
+        // Bug 13: No error handling
+        function selectPlan(plan) {
+            // Bug 14: Undefined variable usage
+            selectedPlan = plan;
+            updateUI();
+        }
+
+        // Bug 15: Function called but not defined
+        function updateUI() {
+            const cards = document.querySelectorAll('.pricing-card');
+            cards.forEach(card => {
+                // Bug 16: Incorrect event binding
+                card.addEventListener('click', selectPlan);
+            });
+        }
+
+        // Initialize the page
+        updateUI();
+    </script>
+</body>
+</html>
