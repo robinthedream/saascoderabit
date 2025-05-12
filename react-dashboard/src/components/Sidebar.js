@@ -18,22 +18,7 @@ const SidebarItem = ({ icon, children }) => (
   </Box>
 );
 
-// Bug: Props destructuring with default values but no props passed
-const Sidebar = ({ items = [], onSelect = () => {} }) => {
-  // Bug: Unnecessary useEffect
-  useEffect(() => {
-    console.log('Sidebar mounted')
-  })
-
-  // Bug: Magic numbers
-  const sidebarWidth = 250
-  const itemHeight = 40
-
-  // Bug: Inline styles instead of using Chakra UI props
-  const styles = {
-    width: `${sidebarWidth}px`,
-    minHeight: `${itemHeight * 5}px`
-  }
+const Sidebar = () => {
   return (
     <Box
       h="calc(100vh - 60px)"

@@ -34,24 +34,31 @@ const Dashboard = () => {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
 
-  // Bug: No error handling, no loading state management
   useEffect(() => {
-    fetch('https://api.example.com/stats')
-      .then(res => res.json())
-      .then(data => {
-        setData(data)
-        setLoading(false)
-      })
+    const fetchData = async () => {
+      try {
+        const res = await fetch('https://api.example.com/stats');
+        if (!res.ok) throw new Error('Failed to fetch stats');
+        const jsonData = await res.json();
+        setData(jsonData);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
   }, [])
 
-  // Bug: Unnecessary variable declaration
-  let temp = 'unused'
-
-  // Bug: Potential memory leak
+  // Polling effect with cleanup
   useEffect(() => {
     const interval = setInterval(() => {
-      console.log('Polling...')
-    }, 1000)
+      // Add actual polling logic here
+      console.log('Polling...');
+    }, 1000);
+    
+    // Cleanup function to prevent memory leak
+    return () => clearInterval(interval);
   }, [])
   const recentActivities = [
     { user: 'John Doe', action: 'Created new project', time: '2 minutes ago' },
