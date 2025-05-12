@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buggy Landing Page</title>
+    <style>
+        /* Bug 1: Missing body margin reset will cause unwanted spacing */
+        .header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* Bug 2: Incorrect selector name (should be .nav-links) */
+        .navigation-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 10px;
+        }
+
+        /* Bug 3: z-index without position property won't work */
+        .hero {
+            z-index: 1;
+            background-color: #ecf0f1;
+            padding: 50px;
+            text-align: center;
+        }
+
+        .button {
+            background-color: #3498db;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            /* Bug 4: Transition property with no hover state */
+            transition: all 0.3s;
+        }
+
+        /* Bug 5: Footer with fixed height might cut off content */
+        .footer {
+            background-color: #2c3e50;
+            color: white;
+            height: 50px;
+            text-align: center;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>Welcome to Our Website</h1>
+    </header>
+
+    <!-- Bug 6: Wrong class name used here -->
+    <nav class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <section class="hero">
+        <h2>Amazing Product</h2>
+        <p>Discover the best features that will change your life!</p>
+        <!-- Bug 7: onClick should be onclick -->
+        <button class="button" onClick="showMessage()">Learn More</button>
+    </section>
+
+    <footer class="footer">
+        <p>© 2025 Your Company. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Bug 8: Function defined after it's used in the button
+        function showMessage() {
+            // Bug 9: Console log instead of actual user feedback
+            console.log("Button clicked!");
+            // Bug 10: Undefined variable usage
+            messageCount += 1;
+        }
+    </script>
+</body>
+</html>

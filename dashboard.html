@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buggy SaaS Dashboard</title>
+    <style>
+        /* Bug 1: Missing box-sizing reset */
+        .dashboard {
+            display: grid;
+            /* Bug 2: Invalid grid template syntax */
+            grid-template: "sidebar main" 100vh;
+        }
+
+        .sidebar {
+            /* Bug 3: Fixed width might cause issues on mobile */
+            width: 250px;
+            background: #2c3e50;
+            color: white;
+            /* Bug 4: Padding only on one side */
+            padding-left: 20px;
+        }
+
+        /* Bug 5: Specificity issue - too specific selector */
+        .dashboard div.main-content div.widget {
+            background: #f5f6fa;
+            border-radius: 8px;
+            margin: 10px;
+            padding: 15px;
+        }
+
+        .stats {
+            display: flex;
+            gap: 20px;
+            /* Bug 6: No wrap on mobile */
+            flex-wrap: no-wrap;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            /* Bug 7: Hard-coded width */
+            width: 200px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        /* Bug 8: No hover state for interactive elements */
+        .nav-item {
+            color: white;
+            text-decoration: none;
+            display: block;
+            padding: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <div class="sidebar">
+            <h2>Dashboard</h2>
+            <!-- Bug 9: Missing alt attributes -->
+            <img src="logo.png" class="logo">
+            <nav>
+                <a href="#" class="nav-item">Overview</a>
+                <a href="#" class="nav-item">Analytics</a>
+                <a href="#" class="nav-item">Customers</a>
+                <a href="#" class="nav-item">Settings</a>
+            </nav>
+        </div>
+
+        <div class="main-content">
+            <div class="stats">
+                <!-- Bug 10: Data attributes not matching JavaScript -->
+                <div class="stat-card" data-statistic="users">
+                    <h3>Total Users</h3>
+                    <p class="stat-value">1,234</p>
+                </div>
+                <div class="stat-card" data-statistic="revenue">
+                    <h3>Revenue</h3>
+                    <p class="stat-value">$45,678</p>
+                </div>
+                <div class="stat-card" data-statistic="active">
+                    <h3>Active Users</h3>
+                    <p class="stat-value">789</p>
+                </div>
+            </div>
+
+            <div class="widget">
+                <h3>Recent Activity</h3>
+                <div id="activity-list"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Bug 11: No error handling
+        function loadStats() {
+            const stats = {
+                users: 1234,
+                revenue: 45678,
+                active: 789
+            };
+            
+            // Bug 12: Incorrect querySelector syntax
+            document.querySelector('.stat-card').forEach(card => {
+                const type = card.dataset.statistic;
+                card.querySelector('.stat-value').textContent = stats[type];
+            });
+        }
+
+        // Bug 13: Missing activity data variable
+        function displayActivity() {
+            const activityList = document.getElementById('activity-list');
+            activities.forEach(activity => {
+                const item = document.createElement('div');
+                item.textContent = activity;
+                activityList.appendChild(item);
+            });
+        }
+
+        // Bug 14: Function called before DOM is ready
+        loadStats();
+        displayActivity();
+    </script>
+</body>
+</html>
